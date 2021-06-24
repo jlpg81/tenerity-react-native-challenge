@@ -17,7 +17,7 @@
 In this folder you will find a react native application, where you need to implement your solution for the technical challenge.
 
 ### back
-This folder contains a mock backend that serves the data needed to complete the technical challenge. This server is built using [JSON Serve](https://github.com/typicode/json-server). To run this server, use the command `yarn server`.
+This folder contains a mock backend that serves the data needed to complete the technical challenge. This server is built using [JSON Server](https://github.com/typicode/json-server). To run this server, use the command `yarn serve`.
 Refer to the [JSON Server](https://github.com/typicode/json-server) documentation on how to query data from the APIs.
 
 

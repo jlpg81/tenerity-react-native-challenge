@@ -6,6 +6,7 @@ import context from '../context/context';
 
 export default function OfferList() {
   const contextFunctions = useContext(context);
+  console.log('contextFunctions', typeof contextFunctions);
 
   const toggleOffer = id => {
     if (contextFunctions.myOffers.has(id)) {
@@ -23,30 +24,34 @@ export default function OfferList() {
   };
 
   return (
-    <ScrollView>
-      {contextFunctions.offers
-        .filter(offer => offer.promoted)
-        .map(offer => (
-          <OfferItem
-            offer={offer}
-            key={offer.id}
-            tags={contextFunctions.tags}
-            active={contextFunctions.myOffers?.has(offer.id)}
-            toggleOffer={toggleOffer}
-          />
-        ))}
-      {contextFunctions.offers
-        .filter(offer => !offer.promoted)
-        .map(offer => (
-          <OfferItem
-            offer={offer}
-            key={offer.id}
-            tags={contextFunctions.tags}
-            active={contextFunctions.myOffers?.has(offer.id)}
-            toggleOffer={toggleOffer}
-          />
-        ))}
-    </ScrollView>
+    <context.Consumer>
+      {({ myOffers }) => (
+        <ScrollView>
+          {contextFunctions.offers
+            .filter(offer => offer.promoted)
+            .map(offer => (
+              <OfferItem
+                offer={offer}
+                key={offer.id}
+                tags={contextFunctions.tags}
+                active={myOffers?.has(offer.id)}
+                toggleOffer={toggleOffer}
+              />
+            ))}
+          {contextFunctions.offers
+            .filter(offer => !offer.promoted)
+            .map(offer => (
+              <OfferItem
+                offer={offer}
+                key={offer.id}
+                tags={contextFunctions.tags}
+                active={myOffers?.has(offer.id)}
+                toggleOffer={toggleOffer}
+              />
+            ))}
+        </ScrollView>
+      )}
+    </context.Consumer>
   );
 }
 

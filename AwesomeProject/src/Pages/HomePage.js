@@ -15,7 +15,7 @@ import context from '../context/context';
 
 const HomePage = () => {
   const navigation = useNavigation();
-  const contextFunctions = useContext(context);
+  // const contextFunctions = useContext(context);
 
   const goToMyOffers = () => {
     console.log('gogo');

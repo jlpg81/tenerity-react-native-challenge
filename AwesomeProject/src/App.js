@@ -41,6 +41,10 @@ const App = () => {
       .catch(e => console.log(e));
   }, []);
 
+  useEffect(() => {
+    console.log('myOffers', myOffers);
+  }, [myOffers]);
+
   return (
     <Context.Provider value={contextFunctions}>
       <NavigationContainer>

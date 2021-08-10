@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Image,
   StyleSheet,
@@ -7,8 +7,11 @@ import {
   Switch,
   View,
 } from 'react-native';
+import context from '../context/context';
 
 export default function OfferItem({ offer, tags, active, toggleOffer }) {
+  const contextFunctions = useContext(context);
+
   const [activeSwitch, setActiveSwitch] = useState(active);
   console.log('offer', offer.id, active, activeSwitch);
 

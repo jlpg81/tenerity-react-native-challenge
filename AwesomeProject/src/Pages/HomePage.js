@@ -18,7 +18,6 @@ const HomePage = () => {
   // const contextFunctions = useContext(context);
 
   const goToMyOffers = () => {
-    console.log('gogo');
     navigation.navigate('MyOffersPage');
   };
 

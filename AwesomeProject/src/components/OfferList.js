@@ -6,19 +6,14 @@ import context from '../context/context';
 
 export default function OfferList() {
   const contextFunctions = useContext(context);
-  console.log('contextFunctions', typeof contextFunctions);
 
   const toggleOffer = id => {
     if (contextFunctions.myOffers.has(id)) {
-      console.log('toggling');
       const newSet = contextFunctions.myOffers;
       newSet.delete(id);
-      console.log(newSet);
       contextFunctions.setMyOffers(newSet);
     } else {
-      console.log('toggling2');
       const newSet = contextFunctions.myOffers.add(id);
-      console.log(newSet);
       contextFunctions.setMyOffers(newSet);
     }
   };

@@ -6,11 +6,9 @@ export default function MyOffersItem({ offer }) {
   const contextFunctions = useContext(context);
 
   const removeHandler = () => {
-    console.log('removing', offer.id);
-    const newSet = contextFunctions.myOffers;
-    newSet.delete(offer.id);
-    console.log(newSet);
-    contextFunctions.setMyOffers(newSet);
+    contextFunctions.myOffers.delete(offer.id);
+    const newSet = Array.from(contextFunctions.myOffers);
+    contextFunctions.setMyOffers(new Set(newSet));
   };
 
   return (

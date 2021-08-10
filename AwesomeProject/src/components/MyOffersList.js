@@ -8,8 +8,6 @@ export default function MyOffersList() {
   const contextFunctions = useContext(context);
   const [total, setTotal] = useState(0);
 
-  useEffect(() => {}, [contextFunctions.myOffers]);
-
   const calculatePrice = offerArray => {
     let currentTotal = 0;
     const myOffersArray = offerArray.filter(offer =>
@@ -18,8 +16,6 @@ export default function MyOffersList() {
     for (let index = 0; index < myOffersArray.length; index++) {
       currentTotal = currentTotal + myOffersArray[index].price;
     }
-    console.log('calculating currentTotal');
-    console.log(currentTotal);
 
     if (currentTotal !== total) {
       setTotal(currentTotal);
@@ -33,15 +29,9 @@ export default function MyOffersList() {
       {contextFunctions.offers
         .filter(offer => contextFunctions.myOffers.has(offer.id))
         .map((offer, key) => (
-          <MyOffersItem
-            offer={offer}
-            key={key}
-            // setMyOffers={contextFunctions.setMyOffers}
-            // setTotal={setTotal}
-          />
+          <MyOffersItem offer={offer} key={key} />
         ))}
       <Text style={styles.totalPrice}>Total Price: {total}</Text>
-      {/* <Text style={styles.totalPrice}>Total Price: {currentTotal}</Text> */}
     </View>
   );
 }

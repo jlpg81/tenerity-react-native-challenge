@@ -7,18 +7,9 @@ import {
   Switch,
   View,
 } from 'react-native';
-import context from '../context/context';
 
 export default function OfferItem({ offer, tags, active, toggleOffer }) {
-  const contextFunctions = useContext(context);
-
   const [activeSwitch, setActiveSwitch] = useState(active);
-  console.log('offer', offer.id, active, activeSwitch);
-
-  const itemPressed = () => {
-    console.log('pressed ', offer.title);
-    handleToggleOffer();
-  };
 
   const handleToggleOffer = () => {
     setActiveSwitch(!activeSwitch);
@@ -30,7 +21,7 @@ export default function OfferItem({ offer, tags, active, toggleOffer }) {
   }, [active]);
 
   return (
-    <TouchableOpacity onPress={itemPressed}>
+    <TouchableOpacity onPress={handleToggleOffer}>
       <View style={styles.titleView}>
         <Text style={styles.offerTitle}>{offer.title}</Text>
         <Switch value={activeSwitch} onChange={handleToggleOffer}></Switch>

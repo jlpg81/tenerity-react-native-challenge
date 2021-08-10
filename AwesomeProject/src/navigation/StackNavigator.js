@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from '../Pages/HomePage';
-import MyOffers from '../Pages/MyOffers';
+import MyOffersPage from '../Pages/MyOffersPage';
 
 const Stack = createStackNavigator();
 
@@ -16,8 +16,8 @@ function StackNavigator() {
         }}
       />
       <Stack.Screen
-        name="MyOffers"
-        component={MyOffers}
+        name="MyOffersPage"
+        component={MyOffersPage}
         options={{
           headerShown: false,
         }}

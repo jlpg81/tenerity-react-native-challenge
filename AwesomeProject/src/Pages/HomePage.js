@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   View,
   Image,
-  Dimensions,
   Text,
   TouchableOpacity,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import LogoImage from '../assets/logo.png';
 import OfferList from '../components/OfferList';
-import { useNavigation } from '@react-navigation/native';
+import context from '../context/context';
 
 const HomePage = () => {
   const navigation = useNavigation();
+  const contextFunctions = useContext(context);
 
   const goToMyOffers = () => {
-    navigation.navigate('MyOffers');
+    console.log('gogo');
+    navigation.navigate('MyOffersPage');
   };
 
   return (
@@ -43,10 +44,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e1e1',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  scrollView: {
-    flex: 1,
-    flexDirection: 'column',
   },
   contentWrapper: {
     backgroundColor: 'red',
@@ -83,14 +80,6 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 160,
     height: 55,
-  },
-  placeholderWrapper: {
-    marginTop: 32,
-  },
-  placeholderTitle: {
-    fontSize: 24,
-    alignSelf: 'flex-start',
-    marginBottom: 12,
   },
   myOffers: {
     fontSize: 20,

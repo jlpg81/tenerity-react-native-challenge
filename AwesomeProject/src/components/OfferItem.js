@@ -1,21 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
+  Switch,
   View,
 } from 'react-native';
 
-export default function OfferItem({ offer, tags }) {
+export default function OfferItem({ offer, tags, active, toggleOffer }) {
+  const [activeSwitch, setActiveSwitch] = useState(active);
+  console.log('offer', offer.id, active, activeSwitch);
+
   const itemPressed = () => {
     console.log('pressed ', offer.title);
+    handleToggleOffer();
   };
+
+  const handleToggleOffer = () => {
+    setActiveSwitch(!activeSwitch);
+    toggleOffer(offer.id);
+  };
+
+  useEffect(() => {
+    setActiveSwitch(active);
+  }, [active]);
 
   return (
     <TouchableOpacity onPress={itemPressed}>
-      <Text style={styles.offerTitle}>{offer.title}</Text>
+      <View style={styles.titleView}>
+        <Text style={styles.offerTitle}>{offer.title}</Text>
+        <Switch value={activeSwitch} onChange={handleToggleOffer}></Switch>
+      </View>
       <View style={styles.rowContainer}>
         <Image style={styles.imageContainer} source={{ uri: offer.image }} />
 
@@ -45,7 +61,14 @@ export default function OfferItem({ offer, tags }) {
 }
 
 const styles = StyleSheet.create({
-  offerTitle: { fontSize: 20 },
+  titleView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 100,
+  },
+  offerTitle: {
+    fontSize: 20,
+  },
   imageContainer: {
     height: 140,
     width: 140,
@@ -59,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 10,
     flex: 1,
-    // backgroundColor: 'red',
   },
   offerText: {
     marginLeft: 10,

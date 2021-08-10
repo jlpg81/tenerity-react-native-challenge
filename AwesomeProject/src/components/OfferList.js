@@ -1,34 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import OfferItem from './OfferItem';
 
+import context from '../context/context';
+
 export default function OfferList() {
-  const [offers, setOffers] = useState([]);
-  const [tags, setTags] = useState([]);
+  const contextFunctions = useContext(context);
 
-  useEffect(() => {
-    fetch('http://10.0.2.2:3000/offers')
-      .then(response => response.json())
-      .then(data => setOffers(data))
-      .catch(e => console.log(e));
-
-    fetch('http://10.0.2.2:3000/tags')
-      .then(response => response.json())
-      .then(data => setTags(data))
-      .catch(e => console.log(e));
-  }, []);
+  const toggleOffer = id => {
+    if (contextFunctions.myOffers.has(id)) {
+      console.log('toggling');
+      const newSet = contextFunctions.myOffers;
+      newSet.delete(id);
+      console.log(newSet);
+      contextFunctions.setMyOffers(newSet);
+    } else {
+      console.log('toggling2');
+      const newSet = contextFunctions.myOffers.add(id);
+      console.log(newSet);
+      contextFunctions.setMyOffers(newSet);
+    }
+  };
 
   return (
     <ScrollView>
-      {offers
+      {contextFunctions.offers
         .filter(offer => offer.promoted)
         .map(offer => (
-          <OfferItem offer={offer} key={offer.id} tags={tags} />
+          <OfferItem
+            offer={offer}
+            key={offer.id}
+            tags={contextFunctions.tags}
+            active={contextFunctions.myOffers?.has(offer.id)}
+            toggleOffer={toggleOffer}
+          />
         ))}
-      {offers
+      {contextFunctions.offers
         .filter(offer => !offer.promoted)
         .map(offer => (
-          <OfferItem offer={offer} key={offer.id} tags={tags} />
+          <OfferItem
+            offer={offer}
+            key={offer.id}
+            tags={contextFunctions.tags}
+            active={contextFunctions.myOffers?.has(offer.id)}
+            toggleOffer={toggleOffer}
+          />
         ))}
     </ScrollView>
   );

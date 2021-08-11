@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import context from '../context/context';
 
 export default function MyOffersItem({ offer }) {
@@ -16,9 +17,15 @@ export default function MyOffersItem({ offer }) {
       <Text style={styles.itemText}>{offer.title}</Text>
       <View style={styles.priceContainer}>
         <Text style={styles.itemText}>{offer.price}</Text>
-        <Text onPress={removeHandler} style={styles.removeButton}>
+        <Icon
+          name="remove"
+          color="#FF0000"
+          onPress={removeHandler}
+          style={styles.removeButton}
+          size={20}
+        >
           Remove
-        </Text>
+        </Icon>
       </View>
     </View>
   );
@@ -35,6 +42,8 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     marginLeft: 20,
+    width: 20,
+    height: 20,
   },
   itemText: {
     fontSize: 18,
